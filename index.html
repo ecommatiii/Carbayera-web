@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; base-uri 'self'; form-action 'self';">
+<title>Restaurante La Carbayera — Granda, Gijón</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Jost:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f3ece1;
+    --cream-2:#e9dfcf;
+    --wine:#c23b52;
+    --wine-2:#e0546b;
+    --gold:#e8b84b;
+    --stone:#0e0b09;
+    --stone-2:#181310;
+    --stone-soft:rgba(243,236,225,0.72);
+    --line:rgba(243,236,225,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--stone); color:var(--cream); font-family:'Jost', sans-serif; overflow-x:hidden; }
+  .eyebrow{ font-family:'Space Mono', monospace; letter-spacing:0.18em; text-transform:uppercase; font-size:0.68rem; color:var(--gold); }
+  h1,h2,h3{ font-family:'Cormorant Garamond', serif; font-weight:700; color:var(--cream); }
+  a{ color:inherit; }
+
+  nav{ position:fixed; top:0; left:0; right:0; z-index:60; display:flex; justify-content:space-between; align-items:center; padding:18px 6vw; background:rgba(14,11,9,0.85); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  nav .brand{ font-family:'Archivo Black', sans-serif; font-size:0.95rem; letter-spacing:0.02em; }
+  nav ul{ list-style:none; display:none; gap:24px; font-family:'Space Mono', monospace; font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; }
+  nav a{ text-decoration:none; color:var(--cream); }
+  @media(min-width:780px){ nav ul{ display:flex; } }
+  nav .cta-nav{ background:var(--wine); color:var(--stone); padding:9px 16px; font-weight:700; }
+
+  .hero{ position:relative; min-height:96vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 6vw 60px; overflow:hidden;
+    background: radial-gradient(circle at 20% 10%, rgba(226,84,107,0.22), transparent 42%),
+                radial-gradient(circle at 85% 85%, rgba(232,184,75,0.16), transparent 45%),
+                var(--stone); }
+  .hero::before{ content:''; position:absolute; inset:0; background:
+      repeating-linear-gradient(115deg, rgba(243,236,225,0.02) 0px, rgba(243,236,225,0.02) 1px, transparent 1px, transparent 60px);
+    pointer-events:none; }
+  .badge{ position:relative; z-index:2; display:inline-block; border:1px solid var(--gold); color:var(--gold); font-family:'Space Mono', monospace; font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; padding:7px 16px; margin-bottom:26px; }
+  .hero h1{ position:relative; z-index:2; font-family:'Archivo Black', sans-serif; font-size:clamp(3.4rem,13vw,8.2rem); line-height:0.86; margin-bottom:10px; letter-spacing:-0.01em;
+    background:linear-gradient(180deg, var(--cream) 0%, var(--gold) 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero .sub{ position:relative; z-index:2; font-family:'Space Mono', monospace; font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--wine-2); margin-bottom:24px; font-weight:700; }
+  .hero .tagline{ position:relative; z-index:2; font-style:italic; color:var(--stone-soft); font-size:1.2rem; max-width:40ch; margin:0 auto 32px; font-family:'Cormorant Garamond', serif; }
+  .hero-cta{ position:relative; z-index:2; display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+
+  .btn{ font-family:'Space Mono', monospace; font-size:0.74rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:15px 28px; text-decoration:none; border:1px solid var(--gold); transition:all .2s ease; cursor:pointer; }
+  .btn-solid{ background:var(--gold); color:var(--stone); border-color:var(--gold); }
+  .btn-solid:hover{ background:var(--wine-2); border-color:var(--wine-2); color:var(--cream); transform:translateY(-2px); }
+  .btn-outline{ background:transparent; color:var(--gold); }
+  .btn-outline:hover{ background:var(--gold); color:var(--stone); }
+
+  section{ padding:96px 6vw; max-width:1150px; margin:0 auto; }
+  .section-head{ margin-bottom:44px; }
+  .section-head h2{ font-family:'Archivo Black', sans-serif; font-size:clamp(2rem,4.6vw,3rem); margin-top:10px; letter-spacing:-0.01em; }
+
+  .welcome{ display:grid; grid-template-columns:1fr; gap:46px; align-items:center; }
+  @media(min-width:860px){ .welcome{ grid-template-columns:1fr 1fr; } }
+  .welcome p{ line-height:1.85; color:var(--stone-soft); margin-bottom:16px; max-width:56ch; font-size:1.06rem; }
+  .photo-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .photo-slot{ aspect-ratio:1/1; border:1px dashed var(--line); background:var(--stone-2); display:flex; align-items:center; justify-content:center; text-align:center; padding:16px; }
+  .photo-slot:first-child{ grid-column:1/-1; aspect-ratio:16/10; }
+  .photo-slot span{ font-family:'Space Mono', monospace; font-size:0.62rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--gold); opacity:0.8; }
+
+  .menu-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .dish{ background:var(--stone); padding:32px 26px; transition:background .25s ease; }
+  .dish:hover{ background:var(--stone-2); }
+  .dish .tag{ font-family:'Space Mono', monospace; font-size:0.6rem; color:var(--wine-2); letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
+  .dish h3{ font-family:'Archivo Black', sans-serif; font-size:1.15rem; margin:10px 0; letter-spacing:-0.005em; }
+  .dish p{ font-size:0.92rem; color:var(--stone-soft); line-height:1.55; }
+
+  .banquet{ background:linear-gradient(135deg, var(--wine) 0%, #8a2038 100%); color:var(--cream); }
+  .banquet .eyebrow{ color:var(--stone); opacity:0.75; }
+  .banquet h2{ color:var(--cream); }
+  .banquet-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:2px; margin-top:36px; background:rgba(14,11,9,0.2); }
+  .banquet-card{ background:rgba(14,11,9,0.18); padding:28px; }
+  .banquet-card h3{ font-family:'Archivo Black', sans-serif; color:var(--cream); font-size:1.05rem; margin-bottom:10px; letter-spacing:-0.005em; }
+  .banquet-card p{ opacity:0.88; font-size:0.9rem; line-height:1.6; }
+
+  /* Reservas */
+  .reserva-wrap{ display:grid; grid-template-columns:1fr; gap:44px; }
+  @media(min-width:900px){ .reserva-wrap{ grid-template-columns:0.9fr 1.1fr; } }
+  .reserva-info p{ line-height:1.8; color:var(--stone-soft); margin-bottom:14px; }
+  .reserva-form{ background:var(--stone-2); border:1px solid var(--line); padding:30px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  @media(max-width:540px){ .form-row{ grid-template-columns:1fr; } }
+  .form-field{ display:flex; flex-direction:column; gap:6px; }
+  .form-field.full{ grid-column:1/-1; }
+  .form-field label{ font-family:'Space Mono', monospace; font-size:0.64rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); }
+  .form-field input, .form-field select, .form-field textarea{
+    font-family:'Jost', sans-serif; font-size:0.95rem; padding:11px 12px; border:1px solid var(--line); background:var(--stone); color:var(--cream);
+  }
+  .form-field textarea{ resize:vertical; min-height:80px; }
+  .honeypot{ position:absolute; left:-9999px; opacity:0; height:0; overflow:hidden; }
+  #reserva-status{ margin-top:14px; font-family:'Space Mono', monospace; font-size:0.78rem; }
+  #reserva-status.ok{ color:#7dd68a; }
+  #reserva-status.err{ color:var(--wine-2); }
+  .submit-btn{ width:100%; margin-top:6px; }
+  .submit-btn:disabled{ opacity:0.6; cursor:not-allowed; }
+
+  .info-grid{ display:grid; grid-template-columns:1fr; gap:40px; }
+  @media(min-width:820px){ .info-grid{ grid-template-columns:1fr 1fr; } }
+  .contact-block{ background:var(--stone-2); border:1px solid var(--line); padding:34px; }
+  .contact-block .row{ margin-bottom:16px; }
+  .contact-block .label{ font-family:'Space Mono', monospace; font-size:0.64rem; letter-spacing:0.08em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:4px; }
+  .hours-table{ width:100%; font-family:'Space Mono', monospace; font-size:0.85rem; border-collapse:collapse; }
+  .hours-table td{ padding:9px 0; border-bottom:1px dashed var(--line); }
+  .hours-table td:last-child{ text-align:right; color:var(--gold); }
+
+  .legal{ background:var(--stone-2); }
+  .legal-block{ margin-bottom:34px; }
+  .legal-block h3{ font-family:'Archivo Black', sans-serif; font-size:1.05rem; margin-bottom:10px; }
+  .legal-block p{ color:var(--stone-soft); line-height:1.75; font-size:0.94rem; margin-bottom:8px; }
+
+  footer{ padding:34px 6vw; text-align:center; font-family:'Space Mono', monospace; font-size:0.64rem; letter-spacing:0.06em; color:var(--stone-soft); border-top:1px solid var(--line); }
+  footer a{ text-decoration:underline; color:var(--gold); }
+
+  #cookie-banner{ position:fixed; left:0; right:0; bottom:0; z-index:100; background:var(--stone-2); color:var(--cream); padding:20px 6vw; display:none; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; border-top:1px solid var(--line); }
+  #cookie-banner p{ font-size:0.86rem; max-width:60ch; opacity:0.9; }
+  #cookie-banner a{ color:var(--gold); text-decoration:underline; }
+  .cookie-actions{ display:flex; gap:10px; flex-shrink:0; }
+  .cookie-btn{ font-family:'Space Mono', monospace; font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; padding:11px 18px; border:1px solid rgba(243,236,225,0.3); background:transparent; color:var(--cream); cursor:pointer; }
+  .cookie-btn.accept{ background:var(--gold); color:var(--stone); border-color:var(--gold); font-weight:700; }
+
+  @media(prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">La Carbayera</div>
+  <ul>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#bodas">Bodas y banquetes</a></li>
+    <li><a href="#reservas" class="cta-nav">Reservar</a></li>
+    <li><a href="#info">Contacto</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="badge">Granda · Gijón · Asturias</div>
+  <h1>La Carbayera</h1>
+  <div class="sub">Parrilla · Cordero a la estaca · Banquetes</div>
+  <p class="tagline">Cocina tradicional asturiana a la brasa, y el escenario perfecto para tu celebración.</p>
+  <div class="hero-cta">
+    <a href="#reservas" class="btn btn-solid">Reservar mesa</a>
+    <a href="#carta" class="btn btn-outline">Ver la carta</a>
+  </div>
+</section>
+
+<section id="bienvenida">
+  <div class="welcome">
+    <div>
+      <span class="eyebrow">Bienvenida</span>
+      <h2 style="margin:10px 0 22px;">Fuego, tradición y celebración</h2>
+      <p>En La Carbayera cuidamos cada detalle de la cocina asturiana más tradicional: carnes a la brasa, costillas y nuestro cordero a la estaca, cocinado como se ha hecho siempre.</p>
+      <p>Contamos con amplios salones pensados para bodas, comuniones, bautizos y comidas de empresa — un entorno inmejorable en las afueras de Gijón.</p>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-slot"><span>Fachada / entorno<br>— pendiente de subir —</span></div>
+      <div class="photo-slot"><span>Parrilla / cordero<br>— pendiente —</span></div>
+      <div class="photo-slot"><span>Salón de banquetes<br>— pendiente —</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="carta">
+  <div class="section-head">
+    <span class="eyebrow">Nuestra carta</span>
+    <h2>Cocina tradicional a la brasa</h2>
+  </div>
+  <div class="menu-grid">
+    <div class="dish"><span class="tag">Firma</span><h3>Cordero a la estaca</h3><p>Asado lentamente al fuego, como manda la tradición asturiana.</p></div>
+    <div class="dish"><span class="tag">Parrilla</span><h3>Costillas a la brasa</h3><p>Cocinadas al punto sobre nuestra parrilla de leña.</p></div>
+    <div class="dish"><span class="tag">Parrilla</span><h3>Carnes seleccionadas</h3><p>Cortes escogidos, preparados al estilo de la casa.</p></div>
+    <div class="dish"><span class="tag">Grupos</span><h3>Menús para comuniones</h3><p>Propuestas pensadas para que los protagonistas sean los niños.</p></div>
+    <div class="dish"><span class="tag">Grupos</span><h3>Menús para grupos y empresas</h3><p>Distintas opciones adaptadas al número de comensales.</p></div>
+    <div class="dish"><span class="tag">Bodas</span><h3>Menús de boda a medida</h3><p>Diseñados junto a los novios para su día especial.</p></div>
+  </div>
+  <p style="margin-top:26px; font-family:'Space Mono', monospace; font-size:0.7rem; color:var(--stone-soft);">Precios y menús completos disponibles al reservar o por consulta directa.</p>
+</section>
+
+<section id="bodas" class="banquet">
+  <div class="section-head">
+    <span class="eyebrow">Especial bodas y banquetes</span>
+    <h2 style="color:var(--cream);">Celebra tu día con nosotros</h2>
+  </div>
+  <p style="opacity:0.85; max-width:60ch; line-height:1.8;">Nuestros salones están pensados para acompañar cada momento importante: bodas, comuniones, bautizos y reuniones de empresa, con capacidad para grupos grandes y atención personalizada.</p>
+  <div class="banquet-grid">
+    <div class="banquet-card"><h3>Bodas</h3><p>Menús a medida, salón exclusivo y acompañamiento durante toda la celebración.</p></div>
+    <div class="banquet-card"><h3>Comuniones</h3><p>Espacios y menús pensados para que los niños sean los protagonistas del día.</p></div>
+    <div class="banquet-card"><h3>Grupos y empresa</h3><p>Salones amplios y menús flexibles para comidas y cenas de trabajo.</p></div>
+  </div>
+</section>
+
+<section id="reservas">
+  <div class="section-head">
+    <span class="eyebrow">Reservas</span>
+    <h2>Reserva tu mesa</h2>
+  </div>
+  <div class="reserva-wrap">
+    <div class="reserva-info">
+      <p>Completá el formulario y confirmamos tu reserva a la mayor brevedad. Para grupos grandes, bodas o eventos especiales, también podés escribirnos directamente.</p>
+      <p style="font-size:0.85rem; opacity:0.75;">Al enviar el formulario aceptás nuestra <a href="#privacidad" style="text-decoration:underline;">política de privacidad</a>.</p>
+    </div>
+    <form class="reserva-form" id="reserva-form" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="r-nombre">Nombre</label>
+          <input type="text" id="r-nombre" name="nombre" required maxlength="80" autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="r-telefono">Teléfono</label>
+          <input type="tel" id="r-telefono" name="telefono" required maxlength="20" autocomplete="tel">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="r-email">Email</label>
+          <input type="email" id="r-email" name="email" required maxlength="120" autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="r-comensales">Nº de comensales</label>
+          <input type="number" id="r-comensales" name="comensales" required min="1" max="60">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="r-fecha">Fecha</label>
+          <input type="date" id="r-fecha" name="fecha" required>
+        </div>
+        <div class="form-field">
+          <label for="r-turno">Turno</label>
+          <select id="r-turno" name="turno" required>
+            <option value="">Elegir...</option>
+            <option value="comida">Comer</option>
+            <option value="cena">Cenar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full">
+          <label for="r-motivo">Motivo (opcional)</label>
+          <select id="r-motivo" name="motivo">
+            <option value="general">Reserva general</option>
+            <option value="boda">Boda</option>
+            <option value="comunion">Comunión</option>
+            <option value="grupo">Grupo / empresa</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field full">
+          <label for="r-comentarios">Comentarios (opcional)</label>
+          <textarea id="r-comentarios" name="comentarios" maxlength="500"></textarea>
+        </div>
+      </div>
+      <input type="text" name="empresa_web" class="honeypot" tabindex="-1" autocomplete="off">
+      <button type="submit" class="btn btn-solid submit-btn" id="reserva-submit">Enviar reserva</button>
+      <div id="reserva-status"></div>
+    </form>
+  </div>
+</section>
+
+<section id="info">
+  <div class="info-grid">
+    <div>
+      <span class="eyebrow">Horario</span>
+      <h2 style="margin:10px 0 22px;">Cuándo visitarnos</h2>
+      <table class="hours-table">
+        <tr><td>Todos los días</td><td>Consultar horario</td></tr>
+      </table>
+    </div>
+    <div class="contact-block">
+      <div class="row"><span class="label">Dirección</span>Camín de la Carbayera, 306 — Granda (Asturias)</div>
+      <div class="row"><span class="label">Teléfono</span>985 13 70 25</div>
+      <div class="row"><span class="label">Email</span>contactoweb@lacarbayera.com</div>
+      <a href="tel:+34985137025" class="btn btn-solid" style="margin-top:8px;">Llamar directamente</a>
+    </div>
+  </div>
+</section>
+
+<section id="privacidad" class="legal">
+  <div class="section-head"><span class="eyebrow">Legal</span><h2>Política de privacidad</h2></div>
+  <div class="legal-block">
+    <h3>Responsable</h3>
+    <p>Restaurante La Carbayera — Camín de la Carbayera, 306, Granda (Asturias). Contacto: contactoweb@lacarbayera.com.</p>
+  </div>
+  <div class="legal-block">
+    <h3>Datos de reservas</h3>
+    <p>Al reservar, tratamos nombre, teléfono, email, fecha y número de comensales exclusivamente para gestionar su reserva. Los datos se almacenan de forma segura y no se comparten con terceros salvo obligación legal.</p>
+  </div>
+  <div class="legal-block">
+    <h3>Sus derechos</h3>
+    <p>Puede solicitar acceso, rectificación o eliminación de sus datos escribiendo a contactoweb@lacarbayera.com.</p>
+  </div>
+</section>
+
+<section id="terminos" class="legal">
+  <div class="section-head"><span class="eyebrow">Legal</span><h2>Términos de servicio</h2></div>
+  <div class="legal-block">
+    <h3>Reservas</h3>
+    <p>El envío del formulario constituye una solicitud de reserva, no una confirmación definitiva hasta ser validada por el restaurante.</p>
+  </div>
+  <div class="legal-block">
+    <h3>Uso del sitio</h3>
+    <p>Esta web tiene carácter informativo y de gestión de reservas para Restaurante La Carbayera. El contenido puede actualizarse sin previo aviso.</p>
+  </div>
+</section>
+
+<footer>
+  Restaurante La Carbayera · Granda, Gijón — <a href="#privacidad">Privacidad</a> · <a href="#terminos">Términos</a>
+</footer>
+
+<div id="cookie-banner">
+  <p>Usamos cookies técnicas necesarias para el funcionamiento del sitio. Más información en nuestra <a href="#privacidad">política de privacidad</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn" id="cookie-reject">Rechazar</button>
+    <button class="cookie-btn accept" id="cookie-accept">Aceptar</button>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var KEY = 'carbayera_cookie_consent';
+    var banner = document.getElementById('cookie-banner');
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch(e) {}
+    if(!stored){ banner.style.display = 'flex'; }
+    function setConsent(v){ try { localStorage.setItem(KEY, v); } catch(e) {} banner.style.display = 'none'; }
+    document.getElementById('cookie-accept').addEventListener('click', function(){ setConsent('accepted'); });
+    document.getElementById('cookie-reject').addEventListener('click', function(){ setConsent('rejected'); });
+  })();
+
+  (function(){
+    var form = document.getElementById('reserva-form');
+    var status = document.getElementById('reserva-status');
+    var submitBtn = document.getElementById('reserva-submit');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+      status.textContent = '';
+      status.className = '';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+
+      // Honeypot anti-bot: campo oculto, si viene relleno es un bot.
+      if(data.empresa_web){ return; }
+
+      // Validación básica en frontend (la real ocurre en el servidor)
+      if(!data.nombre || !data.telefono || !data.email || !data.fecha || !data.turno || !data.comensales){
+        status.textContent = 'Completá todos los campos obligatorios.';
+        status.className = 'err';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try{
+        var res = await fetch('/.netlify/functions/reservar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        var result = await res.json().catch(function(){ return {}; });
+
+        if(res.ok){
+          status.textContent = '¡Reserva enviada! Te contactaremos para confirmarla.';
+          status.className = 'ok';
+          form.reset();
+        } else if(res.status === 429){
+          status.textContent = 'Demasiados intentos. Probá de nuevo en unos minutos.';
+          status.className = 'err';
+        } else {
+          status.textContent = result.error || 'No se pudo enviar la reserva. Probá de nuevo.';
+          status.className = 'err';
+        }
+      } catch(err){
+        status.textContent = 'Error de conexión. Probá de nuevo.';
+        status.className = 'err';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar reserva';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
